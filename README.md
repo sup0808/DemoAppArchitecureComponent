@@ -1,0 +1,2 @@
+# DemoAppArchitecureComponent
+Android jetpack component
