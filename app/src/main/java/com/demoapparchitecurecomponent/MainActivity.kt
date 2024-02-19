@@ -9,50 +9,72 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import com.demoapparchitecurecomponent.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    var count: Int = 0
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+    lateinit var viewModel : MainViewModel;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        binding.button.setOnClickListener(incrementClick)
+        binding.button.setOnClickListener {
+            viewModel.increment()
+            setText()
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    var incrementClick: View.OnClickListener = View.OnClickListener {
+        //increment()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
+    private fun setText() {
+
+        binding.textView.text = viewModel.count.toString()
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
+
 }
+
+/*
+*
+* /**
+ * You can edit, run, and share this code.
+ * play.kotlinlang.org
+ */
+fun main(args : Array<String>){
+  InitOrderDemo("Supriya",13)
+ // User("Arvind")
+}
+
+class InitOrderDemo(name: String) {
+    //val firstProperty = "First property: $name".also(::println)
+
+    init {
+        println("First initializer block that prints $name")
+    }
+
+    constructor InitOrderDemo(name: String, age: Int) : this(name){
+        //println("Secondary Constructor $age")
+    }
+
+
+}
+
+class User(name : String){
+   // println("First Property ")
+    val firstPropert = "$name".also(::println)
+    init{
+        println("$name")
+    }
+}*/
