@@ -1,2 +1,1 @@
-# DemoAppArchitecureComponent
-Android jetpack component
+DataBinding Example
