@@ -9,13 +9,13 @@ fun main(){
     println(p1 == p2) //p1.equals(p2) false value is same but address is diffeernt, refers differnt object
 }
 
-class PersonDemo(val id : Int,val name: String){
+data class PersonDemo(val id : Int,val name: String){
 
 }
 
 //Output
 /*
-com.demoapparchitecurecomponent.PersonDemo@67b64c45
-com.demoapparchitecurecomponent.PersonDemo@4411d970
-1740000325
-false*/
+PersonDemo(id=1, name=Supriya)
+PersonDemo(id=1, name=Supriya)
+-190059828
+true*/
