@@ -3,22 +3,19 @@ package com.demoapparchitecurecomponent
 fun main() {
     val currentDirections = Directions.NORTH
 
-    val message = when(currentDirections){
-        Directions.EAST -> "East Directions"
-        Directions.WEST -> "WEST Directions"
-        Directions.NORTH -> "NORTH Directions"
-        Directions.SOUTH -> "SOUTH Directions"
+    println(currentDirections)
+    println(currentDirections.name)
+    println(currentDirections.number)
 
+    for( i :Directions in Directions.values() ){
+        println(i)
     }
 
-    println(message)
-
-    println(Directions.valueOf("WEST"))
 }
 
-enum class Directions {
-    EAST,
-    WEST,
-    NORTH,
-    SOUTH
+enum class Directions(val number : Int) {
+    EAST(1),
+    WEST(2),
+    NORTH(3),
+    SOUTH(4)
 }
