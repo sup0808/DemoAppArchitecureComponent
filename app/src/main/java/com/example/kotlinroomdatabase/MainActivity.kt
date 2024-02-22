@@ -1,26 +1,48 @@
 package com.example.kotlinroomdatabase
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import android.view.Menu
+import android.view.MenuItem
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.room.Room
+
 import com.example.kotlinroomdatabase.databinding.ActivityMainBinding
+
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    lateinit var database: ContactDatabase
+    val DATABASE_NAME ="ContactDB"
 
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        setupActionBarWithNavController(findNavController(R.id.fragment))
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        database = Room.databaseBuilder(
+                        applicationContext,
+                        ContactDatabase::class.java,
+                        DATABASE_NAME)
+                        .build()
+
+        GlobalScope.launch {
+            database.contactDao().insertContact(Contact(0,"Supriya","9599694764"))
+        }
+
+        val conatcts = database.contactDao().getContact()
+        conatcts.observe(this, Observer {
+            println(it)
+        })
     }
 
-    // Enable back arrow button functionality in Add Fragment to return to List Fragment (main page of the app)
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.fragment)
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
+
 }
