@@ -28,11 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        database = Room.databaseBuilder(
-                        applicationContext,
-                        ContactDatabase::class.java,
-                        DATABASE_NAME)
-                        .build()
+        database =  ContactDatabase.getDatabase(this)
 
         GlobalScope.launch {
             database.contactDao().insertContact(Contact(0,"Supriya","9599694764"))
