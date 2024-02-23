@@ -1,18 +1,18 @@
 package com.demoapparchitecurecomponent
 
 
+
+
 fun main() {
 
-val obj = object : com.demoapparchitecurecomponent.Cloneable{
-    override fun clone() {
-        println("Not yet implemented")
+
+    val obj = object {} // Object Expression , obj = annonmous object
+
+    val testObj = object {
+        val number = 10
+        fun test() {
+            println("Object Excprssion Example")
+        }
     }
-}
-
-    obj.clone()
-
-}
-
-interface Cloneable{
-    fun  clone()
+    testObj.test()
 }
