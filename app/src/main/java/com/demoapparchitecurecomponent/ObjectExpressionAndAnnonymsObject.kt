@@ -3,14 +3,16 @@ package com.demoapparchitecurecomponent
 
 fun main() {
 
-
-    val obj = object {} // Object Expression , obj = annunums object
-
-    val testObj = object {
-        val number = 10
-        fun test() {
-            println("Object Excprssion Example")
-        }
+val obj = object : com.demoapparchitecurecomponent.Cloneable{
+    override fun clone() {
+        println("Not yet implemented")
     }
-    testObj.test()
+}
+
+    obj.clone()
+
+}
+
+interface Cloneable{
+    fun  clone()
 }
