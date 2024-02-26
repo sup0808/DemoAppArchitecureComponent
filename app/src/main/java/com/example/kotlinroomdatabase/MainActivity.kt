@@ -17,6 +17,7 @@ import com.example.kotlinroomdatabase.databinding.ActivityMainBinding
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         database =  ContactDatabase.getDatabase(this)
 
         GlobalScope.launch {
-            database.contactDao().insertContact(Contact(0,"Supriya","9599694764"))
+            database.contactDao().insertContact(Contact(0,"Supriya","9599694764", "Date()",5))
         }
 
         val conatcts = database.contactDao().getContact()
