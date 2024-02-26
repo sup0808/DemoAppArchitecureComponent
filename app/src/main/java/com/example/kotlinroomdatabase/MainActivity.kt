@@ -33,11 +33,17 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             database.contactDao().insertContact(Contact(0,"Supriya","9599694764", "Date()",5))
+            database.userDao().addUser(User(0,"Arvind","SUpta"))
         }
 
         val conatcts = database.contactDao().getContact()
         conatcts.observe(this, Observer {
-            println(it)
+            println("Contact :: $it")
+        })
+
+        val users = database.userDao().getUsers()
+        users.observe(this, Observer {
+            println("Users :: $it")
         })
     }
 

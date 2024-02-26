@@ -8,11 +8,13 @@ import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [Contact::class], version = 2)
+@Database(entities = [Contact::class, User::class], version = 2)
 //@TypeConverters(Convertors::class)
 abstract class ContactDatabase : RoomDatabase() {
 
     abstract fun contactDao() : ContactDAO
+
+    abstract  fun userDao() : UserDAO
 
 
 
