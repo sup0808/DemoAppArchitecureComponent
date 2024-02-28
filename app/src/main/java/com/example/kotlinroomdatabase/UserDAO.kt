@@ -3,15 +3,17 @@ package com.example.kotlinroomdatabase
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import org.w3c.dom.ls.LSInput
 
 @Dao
-interface UserDAO {
+abstract class UserDAO {
 
-    @Insert
-    suspend fun addUser(user: User)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    //@Insert
+    abstract suspend fun addUser(user: User)
 
     @Query("select * from users")
-    fun getUsers() : LiveData<List<User>>
+    abstract fun getUsers() : LiveData<List<User>>
 }

@@ -32,8 +32,11 @@ class MainActivity : AppCompatActivity() {
         database =  ContactDatabase.getDatabase(this)
 
         GlobalScope.launch {
-            database.contactDao().insertContact(Contact(0,"Supriya","9599694764", "Date()",5))
-            database.userDao().addUser(User("Arvind","SUpta"))
+            database.contactDao().insertContact(Contact
+                (1,"Arvind","9599694764", "Date today",5))
+           val data= database.userDao().addUser(User("add","gupta",1))
+            println("Contact  value:: $data")
+        // database.userDao().addUser(User("SHrreja","gupta",2))
         }
 
         val conatcts = database.contactDao().getContact()
