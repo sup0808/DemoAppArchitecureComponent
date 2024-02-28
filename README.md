@@ -1,1 +1,1 @@
-# Kotlin MVVM examplw with Retrofit
+# Kotlin MVVM example with Retrofit

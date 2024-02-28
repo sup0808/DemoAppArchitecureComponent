@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.room.Room
 
+
 import com.example.kotlinroomdatabase.databinding.ActivityMainBinding
 
 import kotlinx.coroutines.GlobalScope
@@ -21,33 +22,14 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var database: ContactDatabase
     val DATABASE_NAME ="ContactDB"
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        database =  ContactDatabase.getDatabase(this)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        GlobalScope.launch {
-            database.contactDao().insertContact(Contact
-                (1,"Arvind","9599694764", "Date today",5))
-           val data= database.userDao().addUser(User("add","gupta",1))
-            println("Contact  value:: $data")
-        // database.userDao().addUser(User("SHrreja","gupta",2))
-        }
-
-        val conatcts = database.contactDao().getContact()
-        conatcts.observe(this, Observer {
-            println("Contact :: $it")
-        })
-
-        val users = database.userDao().getUsers()
-        users.observe(this, Observer {
-            println("Users :: $it")
-        })
     }
 
 
