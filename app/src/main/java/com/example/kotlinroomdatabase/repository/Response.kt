@@ -9,9 +9,9 @@ import com.example.kotlinroomdatabase.models.QuoteList
     class Error(val errorMessage : String) : Response()
 }*/
 
-sealed class Response(val quoteList: QuoteList?=null,val errorMessage : String?=null ) {
+sealed class Response<T>(val data: T?=null,val errorMessage : String?=null ) {
 
-    class Loading : Response()
-    class Success( quoteList: QuoteList) : Response(quoteList)
-    class Error( errorMessage : String) : Response(errorMessage = errorMessage)
+    class Loading<T> : Response<T>()
+    class Success<T>( data: T? = null) : Response<T>(data= data)
+    class Error<T>( errorMessage : String) : Response<T>(errorMessage = errorMessage)
 }
