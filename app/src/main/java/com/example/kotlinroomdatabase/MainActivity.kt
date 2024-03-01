@@ -9,6 +9,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -37,12 +38,14 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val quoteService = RetrofitHelper.getInstance().create(QuoteService::class.java)
-        val repository = QuoteRepository(quoteService)
-        mainViewModel = ViewModelProvider(this,MainViewModelFactory(repository))[MainViewModel::class.java]
+
+        val repository = (application as QuoteApplication).quoteRepository
+        mainViewModel = ViewModelProvider(this,MainViewModelFactory(repository = repository))[MainViewModel::class.java]
+
 
         mainViewModel.quotes.observe(this) {
             println("Result :: ${it.results.toString()}")
+            Toast.makeText(this,"Result :: ${it.results.size}", Toast.LENGTH_LONG).show()
         }
 
     }
