@@ -20,6 +20,7 @@ import com.example.kotlinroomdatabase.api.RetrofitHelper
 
 import com.example.kotlinroomdatabase.databinding.ActivityMainBinding
 import com.example.kotlinroomdatabase.repository.QuoteRepository
+import com.example.kotlinroomdatabase.repository.Response
 import com.example.kotlinroomdatabase.viewmodel.MainViewModel
 import com.example.kotlinroomdatabase.viewmodel.MainViewModelFactory
 
@@ -44,8 +45,19 @@ class MainActivity : AppCompatActivity() {
 
 
         mainViewModel.quotes.observe(this) {
-            println("Result :: ${it.results.toString()}")
-            Toast.makeText(this,"Result :: ${it.results.size}", Toast.LENGTH_LONG).show()
+          when(it){
+              is Response.Loading ->{}
+              is Response.Success ->{
+                  it.data?.let { it ->
+                      Toast.makeText(this,"Result :: ${it.results.size}", Toast.LENGTH_LONG).show()
+                  }
+              }
+              is Response.Error -> {
+                  Toast.makeText(this,it.errorMessage.toString(), Toast.LENGTH_LONG).show()
+              }
+
+          }
+
         }
 
     }
