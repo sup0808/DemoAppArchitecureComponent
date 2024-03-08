@@ -4,9 +4,6 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -15,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.*
 import androidx.room.Room
 import com.example.kotlinroomdatabase.api.QuoteService
 import com.example.kotlinroomdatabase.api.RetrofitHelper
@@ -39,6 +36,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var navController: NavController
+
+    private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,7 +46,12 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        setupActionBarWithNavController(navController)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.homeFragment,R.id.searchFragment)
+        )
+
+        setupActionBarWithNavController(navController,appBarConfiguration)
+        binding.bottomNav.setupWithNavController(navController  )
 
 
         val repository = (application as QuoteApplication).quoteRepository
