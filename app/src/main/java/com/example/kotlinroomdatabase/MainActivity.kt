@@ -47,11 +47,12 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment,R.id.searchFragment)
+            setOf(R.id.homeFragment,R.id.searchFragment,R.id.drawer_layout)
         )
 
         setupActionBarWithNavController(navController,appBarConfiguration)
-        binding.bottomNav.setupWithNavController(navController  )
+        binding.bottomNav.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
 
 
         val repository = (application as QuoteApplication).quoteRepository
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

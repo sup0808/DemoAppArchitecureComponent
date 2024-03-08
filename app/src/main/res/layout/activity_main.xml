@@ -7,6 +7,10 @@
 
     </data>
 
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -36,6 +40,16 @@
             android:layout_alignParentBottom ="true"
             app:menu="@menu/drawer_bottom_nave_menu"/>
     </RelativeLayout>
+        
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/drawer_bottom_nave_menu"/>
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 
 
