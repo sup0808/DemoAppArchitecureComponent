@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/termsConditionsFragment"
+        android:title="Terms And Conditions" />
+    <item
+        android:id="@+id/settingFragment"
+        android:title="Settings" />
+</menu>
