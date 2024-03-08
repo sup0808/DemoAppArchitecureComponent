@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
@@ -36,5 +39,13 @@
         <action
             android:id="@+id/action_welcomeFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="username"
+            app:argType="string"
+            android:defaultValue="tes" />
+        <argument
+            android:name="password"
+            app:argType="string"
+            android:defaultValue="kkk" />
     </fragment>
 </navigation>
