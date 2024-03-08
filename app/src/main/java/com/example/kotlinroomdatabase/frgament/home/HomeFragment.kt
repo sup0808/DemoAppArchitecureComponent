@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
 
         binding.loginBtnHome.setOnClickListener {
             findNavController().navigate(
-                R.id.action_homeFragment_to_addFragment)
+                R.id.action_homeFragment_to_loginFragment)
         }
     }
 

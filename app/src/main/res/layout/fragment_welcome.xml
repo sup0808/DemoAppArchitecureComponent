@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        tools:context=".frgament.welcome.WelcomeFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <TextView
+            android:id="@+id/txt_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Successfully Login !"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_welcome"
+            app:layout_constraintStart_toStartOf="@+id/txt_welcome"
+            app:layout_constraintTop_toBottomOf="@+id/txt_welcome"  />
+
+        <TextView
+            android:id="@+id/txt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_userName"
+            app:layout_constraintStart_toStartOf="@+id/txt_userName"
+            app:layout_constraintTop_toBottomOf="@+id/txt_userName" />
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/txt_password"
+            app:layout_constraintStart_toStartOf="@+id/txt_password"
+            app:layout_constraintTop_toBottomOf="@+id/txt_password" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
