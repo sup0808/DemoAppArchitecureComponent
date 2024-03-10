@@ -24,20 +24,28 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+         CoroutineScope(Dispatchers.IO).launch {
+            printFollowers()
+         }
+    }
+
+    suspend fun printFollowers(){
+        var fbFolloers =  0
         CoroutineScope(Dispatchers.IO).launch {
-            Log.d("MainActivity CoroutineScope","${Thread.currentThread().name}")
+            fbFolloers = getFollowers()
         }
 
-        kotlinx.coroutines.GlobalScope.launch(Dispatchers.Main) {
-            Log.d("MainActivity GlobalScope","${Thread.currentThread().name}")
-        }
+        Log.d("MainActivity :: ",fbFolloers.toString())
+    }
 
-        MainScope().launch(Dispatchers.IO){
-            Log.d("MainActivity MainScope","${Thread.currentThread().name}")
-        }
-
-
+    suspend fun getFollowers(): Int{
+        delay(1000)
+        return  54
     }
 
 
 }
+
+
+// output
+//D/MainActivity ::: 0
