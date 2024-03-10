@@ -30,16 +30,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     suspend fun printFollowers(){
-          val job1 =   CoroutineScope(Dispatchers.IO).async {
-                     getFBFollowers()
-        }
-
-        val job2 =   CoroutineScope(Dispatchers.IO).async {
-             getInstaFollowers()
-        }
-
-
-        Log.d("MainActivity :: ",job1.await().toString() +" :: " +job2.await().toString())
+          CoroutineScope(Dispatchers.IO).launch {
+                var fb= async { getFBFollowers()  }
+                var insta= async { getFBFollowers()  }
+              Log.d("MainActivity :: ",fb.await().toString() +" :: " +insta.await().toString())
+          }
     }
 
     suspend fun getFBFollowers(): Int{
