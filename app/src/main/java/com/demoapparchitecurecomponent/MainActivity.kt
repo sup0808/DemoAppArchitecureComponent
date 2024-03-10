@@ -31,12 +31,10 @@ class MainActivity : AppCompatActivity() {
 
     suspend fun printFollowers(){
         var fbFolloers =  0
-     val job=   CoroutineScope(Dispatchers.IO).launch {
-            fbFolloers = getFollowers()
+     val job =   CoroutineScope(Dispatchers.IO).async {
+            getFollowers()
         }
- // job() job put the coroutine in waiting state until task complete ,means thread will not blokeced but will be in suspended state
-        job.join()
-        Log.d("MainActivity :: ",fbFolloers.toString())
+        Log.d("MainActivity :: ",job.await().toString())
     }
 
     suspend fun getFollowers(): Int{
