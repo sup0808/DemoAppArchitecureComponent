@@ -22,6 +22,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val userRepository = UserRepository()
+        val emailService = EmailService()
+        val userRepositoryService = UserRepositoryService(userRepository,emailService)
+        userRepositoryService.registerUser("supriyag75@gmail.com","djdj")
+
 
     }
 
