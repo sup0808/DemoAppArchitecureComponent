@@ -1,2 +1,3 @@
-# DemoAppArchitecureComponent
-Android jetpack component
+# DemoAppArchitecureCompoent
+
+Dagger2 demo
