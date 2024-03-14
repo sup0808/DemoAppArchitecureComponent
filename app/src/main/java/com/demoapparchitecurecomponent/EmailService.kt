@@ -7,6 +7,7 @@ interface NotificationService{
     fun send(to: String, body: String)
 }
 
+
 class EmailService @Inject constructor() : NotificationService{
     override fun send(to: String, body: String) {
         Log.d("EmailService ","email send")
