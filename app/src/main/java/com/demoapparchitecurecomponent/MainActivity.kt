@@ -15,8 +15,10 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     lateinit var component : UserRegistrationServiceComponent
+
     @Inject
     lateinit var userRepositoryService: UserRepositoryService
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +28,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         component = DaggerUserRegistrationServiceComponent.builder().build()
 
-        component.getUserRepositoryService().registerUser("supriyag75@gmail.com","djdj")
+        component.inject(this)
+
+        userRepositoryService.registerUser("njnn","jjj")
 
     }
 

@@ -7,4 +7,6 @@ interface UserRegistrationServiceComponent {
 
     fun getUserRepositoryService() : UserRepositoryService
 
+    fun inject(mainActivity: MainActivity)
+
 }
