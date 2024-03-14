@@ -1,13 +1,13 @@
 package com.demoapparchitecurecomponent
 
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
 @Module
-class UserRepositoryModule {
+abstract class UserRepositoryModule {
 
-    @Provides
-    fun getRoomDbRepository(sqlRepository: SQLRepository): UserRepository{ // since @inject constuctor() is used
-        return sqlRepository
-    }
+    @Binds
+    abstract fun getRoomDbRepository(sqlRepository: SQLRepository): UserRepository // since @inject constuctor() is used
+
 }

@@ -17,6 +17,6 @@ class SQLRepository @Inject constructor()  : UserRepository{
 class RoomDBRepository @Inject constructor()  : UserRepository{
 
     override fun saveUser(email: String, password: String) {
-        Log.d("UserRepository ","user saved")
+        Log.d("RoomDBRepository ","user saved")
     }
 }
