@@ -1,7 +1,9 @@
 package com.demoapparchitecurecomponent
 
-class UserRepositoryService(private val userRepository: UserRepository = UserRepository(),
-                            private val emailService: EmailService = EmailService()
+import javax.inject.Inject
+
+class UserRepositoryService @Inject constructor(private val userRepository: UserRepository ,
+                            private val emailService: EmailService
 ) {
 
     fun registerUser(email : String, password : String){

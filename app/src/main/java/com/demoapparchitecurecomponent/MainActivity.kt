@@ -10,10 +10,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.demoapparchitecurecomponent.databinding.ActivityMainBinding
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-
+    lateinit var component : UserRegistrationServiceComponent
+    @Inject
+    lateinit var userRepositoryService: UserRepositoryService
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,12 +24,9 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        component = DaggerUserRegistrationServiceComponent.builder().build()
 
-        val userRepository = UserRepository()
-        val emailService = EmailService()
-        val userRepositoryService = UserRepositoryService(userRepository,emailService)
-        userRepositoryService.registerUser("supriyag75@gmail.com","djdj")
-
+        component.getUserRepositoryService().registerUser("supriyag75@gmail.com","djdj")
 
     }
 
