@@ -7,7 +7,7 @@ import dagger.Provides
 class UserRepositoryModule {
 
     @Provides
-    fun getRoomDbRepository(): UserRepository{
-        return RoomDBRepository()
+    fun getRoomDbRepository(sqlRepository: SQLRepository): UserRepository{ // since @inject constuctor() is used
+        return sqlRepository
     }
 }
