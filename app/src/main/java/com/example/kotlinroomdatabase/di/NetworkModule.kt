@@ -1,7 +1,6 @@
 package com.example.kotlinroomdatabase.di
 
 import com.example.kotlinroomdatabase.api.QuoteService
-import com.example.kotlinroomdatabase.api.RetrofitHelper
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit

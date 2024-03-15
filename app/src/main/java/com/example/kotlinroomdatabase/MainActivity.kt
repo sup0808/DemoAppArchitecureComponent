@@ -1,33 +1,22 @@
 package com.example.kotlinroomdatabase
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
-import androidx.room.Room
-import com.example.kotlinroomdatabase.api.DaggerHomeComponent
-import com.example.kotlinroomdatabase.api.QuoteService
-import com.example.kotlinroomdatabase.api.RetrofitHelper
 
 
 import com.example.kotlinroomdatabase.databinding.ActivityMainBinding
-import com.example.kotlinroomdatabase.repository.QuoteRepository
 import com.example.kotlinroomdatabase.repository.Response
 import com.example.kotlinroomdatabase.viewmodel.MainViewModel
 import com.example.kotlinroomdatabase.viewmodel.MainViewModelFactory
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {

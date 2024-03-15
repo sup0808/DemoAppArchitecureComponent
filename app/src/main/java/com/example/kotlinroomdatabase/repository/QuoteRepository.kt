@@ -15,14 +15,14 @@ import javax.inject.Inject
 
 class QuoteRepository @Inject constructor(private  val quoteService: QuoteService,
                                           private val quoteDatabase: QuoteDatabase,
-                                          private  val context : Context ) {
+) {
 
     var mutableQuoteList = MutableLiveData<Response<QuoteList>>()
     val quoteLiveData : LiveData<Response<QuoteList>>
     get() = mutableQuoteList
     suspend fun getQuotes(page : Int){
 
-        if(NetworkUtils.verifyAvailableNetwork(context)){
+        //if(NetworkUtils.verifyAvailableNetwork(context)){
             try{
                 val result = quoteService.getQuotes(page)
                 if(result?.body() != null){
@@ -34,13 +34,13 @@ class QuoteRepository @Inject constructor(private  val quoteService: QuoteServic
             }
 
         }
-        else{
+      /*  else{
             val quotes = quoteDatabase.getDao().getResults()
             val quoteList  = QuoteList(1,1,1,quotes,1,1)
             mutableQuoteList.postValue(Response.Success(quoteList))
 
-        }
+        }*/
 
 
-    }
+    //}
 }

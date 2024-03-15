@@ -11,7 +11,7 @@ abstract class QuoteDatabase :RoomDatabase() {
 
     abstract fun getDao() : QuoteDao
 
-    companion object{
+  /*  companion object{  // removed after Dependancy injection
         @Volatile
         private var INSTANCE : QuoteDatabase? = null
         fun getDatabase(context: Context) :QuoteDatabase{
@@ -26,5 +26,5 @@ abstract class QuoteDatabase :RoomDatabase() {
             }
             return INSTANCE!!
         }
-    }
+    }*/
 }
