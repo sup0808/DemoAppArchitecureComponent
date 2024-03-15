@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         appComponent = (application as UserApplication).component
 
-        val userRegistrationServiceComponent = appComponent.getUserRegistrationComponentFactory().create(2)
+        val userRegistrationServiceComponent = appComponent.getUserRegistrationComponent()
         userRegistrationServiceComponent.inject(this)
 
         userRepositoryService.registerUser("njnn","jjj")
