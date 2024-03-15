@@ -26,11 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        component = DaggerUserRegistrationServiceComponent
-                    .builder()
-                     .notificationModule(NotificationModule(4))
-                    .build()
-
+        component = DaggerUserRegistrationServiceComponent.Factory()
+            .create(4)
         component.inject(this)
 
         userRepositoryService.registerUser("njnn","jjj")
