@@ -2,7 +2,9 @@ package com.demoapparchitecurecomponent
 
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules = [NotificationModule::class, UserRepositoryModule::class])
 interface UserRegistrationServiceComponent {
 
@@ -10,9 +12,9 @@ interface UserRegistrationServiceComponent {
 
     fun inject(mainActivity: MainActivity)
 
-    @Component.Factory
+   /* @Component.Factory
     interface Factory{
-        fun create( @BindsInstance retryCount : Int) : UserRegistrationServiceComponent
-    }
+        fun create(@BindsInstance retryCount : Int) : UserRegistrationServiceComponent
+    }*/
 
 }
