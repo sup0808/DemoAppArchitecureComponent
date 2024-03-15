@@ -5,13 +5,13 @@ import dagger.Provides
 import javax.inject.Named
 
 @Module
-class NotificationModule {
+class NotificationModule(private val retryCount : Int) {
 
 
   @MessageQualifier
    @Provides
    fun getNotificationService() :NotificationService{
-      return MessageService()
+      return MessageService(retryCount)
    }
 
    @Named("email")

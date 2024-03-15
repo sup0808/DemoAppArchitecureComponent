@@ -26,7 +26,10 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        component = DaggerUserRegistrationServiceComponent.builder().build()
+        component = DaggerUserRegistrationServiceComponent
+                    .builder()
+                     .notificationModule(NotificationModule(4))
+                    .build()
 
         component.inject(this)
 
