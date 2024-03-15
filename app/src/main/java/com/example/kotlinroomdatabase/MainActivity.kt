@@ -14,6 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
 import androidx.room.Room
+import com.example.kotlinroomdatabase.api.DaggerHomeComponent
 import com.example.kotlinroomdatabase.api.QuoteService
 import com.example.kotlinroomdatabase.api.RetrofitHelper
 
@@ -27,11 +28,15 @@ import com.example.kotlinroomdatabase.viewmodel.MainViewModelFactory
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     val DATABASE_NAME ="ContactDB"
     lateinit var mainViewModel : MainViewModel
+
+    @Inject
+    lateinit var mainViewModelFactory: MainViewModelFactory
 
     private lateinit var binding: ActivityMainBinding
 
@@ -43,6 +48,11 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        (application as QuoteApplication).component.inject(this)
+        mainViewModel = ViewModelProvider(this,mainViewModelFactory)[MainViewModel::class.java]
+
+
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
@@ -53,11 +63,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController,appBarConfiguration)
         binding.bottomNav.setupWithNavController(navController)
         binding.navView.setupWithNavController(navController)
-
-
-        val repository = (application as QuoteApplication).quoteRepository
-        mainViewModel = ViewModelProvider(this,MainViewModelFactory(repository = repository))[MainViewModel::class.java]
-
 
         mainViewModel.quotes.observe(this) {
           when(it){

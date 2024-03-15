@@ -11,10 +11,11 @@ import com.example.kotlinroomdatabase.models.QuoteList
 import com.example.kotlinroomdatabase.utils.NetworkUtils
 
 import com.example.kotlinroomdatabase.repository.Response;
+import javax.inject.Inject
 
-class QuoteRepository(private  val quoteService: QuoteService,
-                      private val quoteDatabase: QuoteDatabase,
-                      private  val context : Context ) {
+class QuoteRepository @Inject constructor(private  val quoteService: QuoteService,
+                                          private val quoteDatabase: QuoteDatabase,
+                                          private  val context : Context ) {
 
     var mutableQuoteList = MutableLiveData<Response<QuoteList>>()
     val quoteLiveData : LiveData<Response<QuoteList>>
