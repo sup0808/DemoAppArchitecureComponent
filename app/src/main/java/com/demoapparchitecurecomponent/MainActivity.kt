@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         appComponent = (application as UserApplication).component
 
-        val userRegistrationServiceComponent = DaggerUserRegistrationServiceComponent.factory().create(2,appComponent)
+        val userRegistrationServiceComponent = appComponent.getUserRegistrationComponentFactory().create(2)
         userRegistrationServiceComponent.inject(this)
 
         userRepositoryService.registerUser("njnn","jjj")

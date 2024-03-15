@@ -4,7 +4,7 @@ import android.app.Application
 
 class UserApplication : Application() {
 
-    lateinit var component : DaggerAppComponent
+    lateinit var component : AppComponent
 
     override fun onCreate() {
         super.onCreate()
