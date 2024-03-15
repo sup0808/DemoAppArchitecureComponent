@@ -4,10 +4,12 @@ import android.app.Application
 
 class UserApplication : Application() {
 
-    lateinit var component : UserRegistrationServiceComponent
+    lateinit var component : DaggerAppComponent
 
     override fun onCreate() {
         super.onCreate()
-        component = DaggerUserRegistrationServiceComponent.builder().build()
+       // component = DaggerUserRegistrationServiceComponent.builder().build()
+
+        component = DaggerAppComponent.builder().build()
     }
 }

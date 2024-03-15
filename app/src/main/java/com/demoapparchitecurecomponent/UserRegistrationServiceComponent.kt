@@ -4,17 +4,19 @@ import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
-@ApplicationScope
-@Component(modules = [NotificationModule::class, UserRepositoryModule::class])
+
+
+@ActivityScope
+@Component( dependencies = [AppComponent::class], modules = [NotificationModule::class, UserRepositoryModule::class])
 interface UserRegistrationServiceComponent {
 
    // fun getUserRepositoryService() : UserRepositoryService
 
     fun inject(mainActivity: MainActivity)
 
-   /* @Component.Factory
+    @Component.Factory
     interface Factory{
-        fun create(@BindsInstance retryCount : Int) : UserRegistrationServiceComponent
-    }*/
+        fun create(@BindsInstance retryCount : Int, appComponent: AppComponent) : UserRegistrationServiceComponent
+    }
 
 }

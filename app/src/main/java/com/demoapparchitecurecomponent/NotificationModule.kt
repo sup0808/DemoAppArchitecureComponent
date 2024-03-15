@@ -10,7 +10,7 @@ class NotificationModule() {
 
 
   @MessageQualifier
-  @ApplicationScope
+  @ActivityScope
    @Provides
    fun getNotificationService() :NotificationService{
       return MessageService()

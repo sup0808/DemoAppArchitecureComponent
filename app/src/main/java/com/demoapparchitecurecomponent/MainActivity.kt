@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var component : UserRegistrationServiceComponent
+    lateinit var appComponent : AppComponent
 
     @Inject
     lateinit var userRepositoryService: UserRepositoryService
@@ -27,8 +27,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        component = (application as UserApplication).component
-        component.inject(this)
+        appComponent = (application as UserApplication).component
+
+        val userRegistrationServiceComponent = DaggerUserRegistrationServiceComponent.factory().create(2,appComponent)
+        userRegistrationServiceComponent.inject(this)
 
         userRepositoryService.registerUser("njnn","jjj")
 
