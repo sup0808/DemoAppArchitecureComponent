@@ -27,8 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        component = DaggerUserRegistrationServiceComponent.builder().build()
-
+        component = (application as UserApplication).component
         component.inject(this)
 
         userRepositoryService.registerUser("njnn","jjj")
