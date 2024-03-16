@@ -3,9 +3,12 @@ package com.demoapparchitecurecomponent
 import android.util.Log
 import javax.inject.Inject
 
-class UserRepository @Inject constructor() {
+
+
+
+class UserRepository @Inject constructor(private val loggerService: LoggerService) {
 
     fun saveuser(){
-        Log.d("UserRepository ","User saved")
+        loggerService.log("Logg saved")
     }
 }
