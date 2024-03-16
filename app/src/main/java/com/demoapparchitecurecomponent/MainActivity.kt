@@ -10,9 +10,14 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.demoapparchitecurecomponent.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var userRepository: UserRepository
 
     private lateinit var binding: ActivityMainBinding
 
@@ -21,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        userRepository.saveuser()
 
     }
 
