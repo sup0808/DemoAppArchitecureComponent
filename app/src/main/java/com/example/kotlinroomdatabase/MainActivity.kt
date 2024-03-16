@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+       val map =  (application as QuoteApplication).component.getMap()
+
         (application as QuoteApplication).component.inject(this)
         mainViewModel = ViewModelProvider(this,mainViewModelFactory)[MainViewModel::class.java]
 

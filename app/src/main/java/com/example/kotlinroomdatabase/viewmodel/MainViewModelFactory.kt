@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.kotlinroomdatabase.repository.QuoteRepository
 import javax.inject.Inject
 
-open class MainViewModelFactory (private val mainViewModel: MainViewModel) : ViewModelProvider.Factory {
+open class MainViewModelFactory (private val map : Map<Class<*>, @JvmSuppressWildcards ViewModel>) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return mainViewModel as T
+        return map[modelClass] as T
     }
 }
