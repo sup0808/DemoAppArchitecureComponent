@@ -1,5 +1,6 @@
 package com.example.kotlinroomdatabase.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,8 +10,10 @@ import com.example.kotlinroomdatabase.repository.QuoteRepository
 import com.example.kotlinroomdatabase.repository.Response
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val repository : QuoteRepository) : ViewModel(){
+class MainViewModel @Inject constructor(private  val repository: QuoteRepository,
+                                            private val randomize: Randomize) : ViewModel(){
 
     init{
         viewModelScope.launch(Dispatchers.IO) {
@@ -20,4 +23,10 @@ class MainViewModel(private val repository : QuoteRepository) : ViewModel(){
 
     val quotes : LiveData<Response<QuoteList>>
     get() = repository.quoteLiveData
+}
+
+class Randomize {
+     fun doAction(){
+         Log.d("MainViewModel ::", "hhjjj")
+     }
 }
