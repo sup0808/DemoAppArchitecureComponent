@@ -3,12 +3,22 @@ package com.demoapparchitecurecomponent
 import android.util.Log
 import javax.inject.Inject
 
+interface UserRepository{
+    fun saveuser()
+}
 
 
+class SqlRepository @Inject constructor() : UserRepository{
 
-class UserRepository @Inject constructor(private val loggerService: LoggerService) {
+   override fun saveuser(){
+        Log.d("Logg saved","SqlRepository")
+    }
+}
 
-    fun saveuser(){
-        loggerService.log("Logg saved")
+
+class FirebaseRepository @Inject constructor() : UserRepository{
+
+    override fun saveuser(){
+        Log.d("Logg saved","FirebaseRepository")
     }
 }
