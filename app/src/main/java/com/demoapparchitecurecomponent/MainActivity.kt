@@ -12,11 +12,13 @@ import android.view.MenuItem
 import com.demoapparchitecurecomponent.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     @Inject
+    @Named("Firebase")
     lateinit var userRepository: UserRepository
 
     private lateinit var binding: ActivityMainBinding
