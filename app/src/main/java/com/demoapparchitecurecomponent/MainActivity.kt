@@ -29,24 +29,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
       val job =  GlobalScope.launch {
-            flow{
+           val firstItem= flow{
                (1..5).forEach{
                    emit(it)
                }
-              }.onStart {
-                     emit(-1)
-                    Log.d("CheezyFlow: ","OnStart")
-                }
-                .onCompletion {
-                    emit(6)
-                    Log.d("CheezyFlow: ","onCompletion")
-                }
-                .onEach {
-                    Log.d("CheezyFlow: ","about to emit value--------- -- $it")
-                }
-                .collect{
-                    Log.d("CheezyFlow 1:: ",it.toString())
-                }
+              }.first()
+
+          Log.d("ChezzyFlow :: ",firstItem.toString())
+
         }
 
 
