@@ -32,13 +32,15 @@ class MainActivity : AppCompatActivity() {
       val job =  GlobalScope.launch {
             val data = producer()
             data.collect{
-                Log.d("CheezyFlow :: ",it.toString())
+                Log.d("CheezyFlow 1:: ",it.toString())
             }
         }
-
         GlobalScope.launch {
-            delay(3500)
-            job.cancel()
+            val data = producer()
+            delay(2500)
+            data.collect{
+                Log.d("CheezyFlow 2:: ",it.toString())
+            }
         }
 
 
