@@ -11,8 +11,11 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.demoapparchitecurecomponent.databinding.ActivityMainBinding
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,31 +28,31 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-      val job =  GlobalScope.launch(Dispatchers.Main) {
-          flow{
-               (1..5).forEach{
-                   Log.d("ChezzyFlow :: Emiiter Thread",Thread.currentThread().name)
-                   emit(it)
+       GlobalScope.launch {
+          producer().collect{
+                   Log.d("ChezzyFlow 1:: ",it.toString())
                }
-          }.flowOn(Dispatchers.IO)
-              .collect{
-                   Log.d("ChezzyFlow :: Collector Thread",Thread.currentThread().name)
-               }
-
-
-
+      }
+        GlobalScope.launch {
+          val result =  producer()
+            delay(2500)
+            result.collect{
+                Log.d("ChezzyFlow :: 2 ",it.toString())
+            }
         }
-
-
-
     }
 
-    fun producer() = flow<Int>{
-        val list = listOf(1,2,3,4,5)
-        list.forEach{
-            delay(1000)
-            emit(it)
+    fun producer() :Flow<Int>{
+        val mutableSharedFlow = MutableSharedFlow<Int>()
+
+        GlobalScope.launch {
+            val list = listOf(1,2,3,4,5)
+            list.forEach{
+                mutableSharedFlow.emit(it)
+                delay(1000)
+            }
         }
+        return mutableSharedFlow
     }
 
 
