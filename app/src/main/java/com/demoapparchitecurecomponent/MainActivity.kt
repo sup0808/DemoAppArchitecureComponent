@@ -29,17 +29,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
       val job =  GlobalScope.launch {
-            val data = producer()
-                .onStart {
+            flow{
+               (1..5).forEach{
+                   emit(it)
+               }
+              }.onStart {
                     Log.d("CheezyFlow: ","OnStart")
                 }
                 .onCompletion {
                     Log.d("CheezyFlow: ","onCompletion")
                 }
                 .onEach {
-                    Log.d("CheezyFlow: ","about to emit -- $it")
+                    Log.d("CheezyFlow: ","about to emit value--------- -- $it")
                 }
-                data.collect{
+                .collect{
                     Log.d("CheezyFlow 1:: ",it.toString())
                 }
         }
