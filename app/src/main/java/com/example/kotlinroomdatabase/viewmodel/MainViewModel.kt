@@ -8,12 +8,13 @@ import com.example.kotlinroomdatabase.db.QuoteDatabase
 import com.example.kotlinroomdatabase.models.QuoteList
 import com.example.kotlinroomdatabase.repository.QuoteRepository
 import com.example.kotlinroomdatabase.repository.Response
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private  val repository: QuoteRepository,
-                                            private val randomize: Randomize) : ViewModel(){
+@HiltViewModel
+class MainViewModel @Inject constructor(private  val repository: QuoteRepository) : ViewModel(){
 
     init{
         viewModelScope.launch(Dispatchers.IO) {

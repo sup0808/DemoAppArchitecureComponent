@@ -15,17 +15,13 @@ import androidx.navigation.ui.*
 import com.example.kotlinroomdatabase.databinding.ActivityMainBinding
 import com.example.kotlinroomdatabase.repository.Response
 import com.example.kotlinroomdatabase.viewmodel.MainViewModel
-import com.example.kotlinroomdatabase.viewmodel.MainViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
-import javax.inject.Inject
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     val DATABASE_NAME ="ContactDB"
     lateinit var mainViewModel : MainViewModel
-
-    @Inject
-    lateinit var mainViewModelFactory: MainViewModelFactory
 
     private lateinit var binding: ActivityMainBinding
 
@@ -37,10 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-       val map =  (application as QuoteApplication).component.getMap()
-
-        (application as QuoteApplication).component.inject(this)
-        mainViewModel = ViewModelProvider(this,mainViewModelFactory)[MainViewModel::class.java]
+             mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
 
 

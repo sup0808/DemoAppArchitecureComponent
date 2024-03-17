@@ -6,16 +6,20 @@ import androidx.room.Room
 import com.example.kotlinroomdatabase.db.QuoteDatabase
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+@InstallIn(SingletonComponent::class)
 @Module
-class DbModule(private val application: Context) {
+class DbModule {
 
     @Singleton
     @Provides
-    fun provideRoomDb():QuoteDatabase{
+    fun provideRoomDb(@ApplicationContext context: Context):QuoteDatabase{
       return  Room.databaseBuilder(
-          application,
+          context,
             QuoteDatabase::class.java,
             "QuotesDB")
             .build()

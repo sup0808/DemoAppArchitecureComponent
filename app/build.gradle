@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     // id 'kotlin-android-extension' // <- Deprecated since Kotlin 1.4.20-M2
     id 'kotlin-kapt'
+    id("com.google.dagger.hilt.android")
     id 'kotlin-parcelize' // <- In order to use '@Parcelize' since 'kotlin-android-extension' is now deprecated
     id 'androidx.navigation.safeargs.kotlin'
 }
@@ -13,8 +14,8 @@ android {
 
     defaultConfig {
         applicationId "com.example.kotlinroomdatabase"
-        minSdkVersion 26 // Change to 26 since attribute iconTint is used on API level 26 and higher.
-        targetSdkVersion 30
+        minSdkVersion 31 // Change to 26 since attribute iconTint is used on API level 26 and higher.
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -85,9 +86,12 @@ dependencies {
     implementation 'javax.inject:javax.inject:1'
 */
 
-    implementation 'com.google.dagger:dagger-android:2.40.5'
+   /* implementation 'com.google.dagger:dagger-android:2.40.5'
     // implementation 'com.google.dagger:dagger-android-support:2.21' // if you use the support libraries
     //annotationProcessor 'com.google.dagger:dagger-android-processor:2.21'
-    kapt 'com.google.dagger:dagger-compiler:2.40.5'
+    kapt 'com.google.dagger:dagger-compiler:2.40.5'*/
+
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
 
 }
