@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
                (1..5).forEach{
                    emit(it)
                }
-              }.first()
+              }.toList()
 
           Log.d("ChezzyFlow :: ",firstItem.toString())
 
