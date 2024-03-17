@@ -34,9 +34,11 @@ class MainActivity : AppCompatActivity() {
                    emit(it)
                }
               }.onStart {
+                     emit(-1)
                     Log.d("CheezyFlow: ","OnStart")
                 }
                 .onCompletion {
+                    emit(6)
                     Log.d("CheezyFlow: ","onCompletion")
                 }
                 .onEach {
