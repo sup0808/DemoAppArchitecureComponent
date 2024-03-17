@@ -1,6 +1,7 @@
 package com.demoapparchitecurecomponent
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -10,6 +11,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.demoapparchitecurecomponent.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +29,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        GlobalScope.launch {
+            val data = producer()
+            data.collect{
+                Log.d("CheezyFlow :: ",it.toString())
+            }
+        }
+    }
 
+    fun producer() = flow<Int>{
+        val list = listOf(1,2,3,4,5,6,7)
+        list.forEach{
+            delay(1000)
+            emit(it)
+        }
     }
 
 
