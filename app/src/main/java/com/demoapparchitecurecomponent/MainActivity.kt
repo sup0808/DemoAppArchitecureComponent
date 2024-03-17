@@ -11,11 +11,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.demoapparchitecurecomponent.databinding.ActivityMainBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,14 +25,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-      val job =  GlobalScope.launch {
-           val firstItem= flow{
+      val job =  GlobalScope.launch(Dispatchers.Main) {
+          flow{
                (1..5).forEach{
+                   Log.d("ChezzyFlow :: Emiiter Thread",Thread.currentThread().name)
                    emit(it)
                }
-              }.toList()
+          }.flowOn(Dispatchers.IO)
+              .collect{
+                   Log.d("ChezzyFlow :: Collector Thread",Thread.currentThread().name)
+               }
 
-          Log.d("ChezzyFlow :: ",firstItem.toString())
+
 
         }
 
