@@ -14,8 +14,7 @@ import com.demoapparchitecurecomponent.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -31,23 +30,26 @@ class MainActivity : AppCompatActivity() {
 
       val job =  GlobalScope.launch {
             val data = producer()
-            data.collect{
-                Log.d("CheezyFlow 1:: ",it.toString())
-            }
+                .onStart {
+                    Log.d("CheezyFlow: ","OnStart")
+                }
+                .onCompletion {
+                    Log.d("CheezyFlow: ","onCompletion")
+                }
+                .onEach {
+                    Log.d("CheezyFlow: ","about to emit -- $it")
+                }
+                data.collect{
+                    Log.d("CheezyFlow 1:: ",it.toString())
+                }
         }
-        GlobalScope.launch {
-            val data = producer()
-            delay(2500)
-            data.collect{
-                Log.d("CheezyFlow 2:: ",it.toString())
-            }
-        }
+
 
 
     }
 
     fun producer() = flow<Int>{
-        val list = listOf(1,2,3,4,5,6,7)
+        val list = listOf(1,2,3,4,5)
         list.forEach{
             delay(1000)
             emit(it)
