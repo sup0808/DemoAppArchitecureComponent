@@ -29,30 +29,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
        GlobalScope.launch {
-          producer().collect{
-                   Log.d("ChezzyFlow 1:: ",it.toString())
+          val result = producer()
+           delay(6000)
+          result.collect{
+                   Log.d("ChezzyFlow item  ",it.toString())
                }
       }
-        GlobalScope.launch {
-          val result =  producer()
-            delay(2500)
-            result.collect{
-                Log.d("ChezzyFlow :: 2 ",it.toString())
-            }
-        }
+
     }
 
     fun producer() :Flow<Int>{
-        val mutableSharedFlow = MutableSharedFlow<Int>(2)
+        val mutableStateFlow = MutableStateFlow(10)
 
         GlobalScope.launch {
-            val list = listOf(1,2,3,4,5)
-            list.forEach{
-                mutableSharedFlow.emit(it)
-                delay(1000)
+            delay(2000)
+            mutableStateFlow.emit(20)
+            delay(2000)
+            mutableStateFlow.emit(30)
+
             }
-        }
-        return mutableSharedFlow
+
+        return mutableStateFlow
     }
 
 
