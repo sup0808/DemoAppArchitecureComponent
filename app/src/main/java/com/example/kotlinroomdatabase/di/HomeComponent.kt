@@ -6,13 +6,13 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [NetworkModule::class, DbModule::class, ViewModelModule::class])
+@Component(modules = [NetworkModule::class, DbModule::class])
 interface HomeComponent {
 
     fun inject(mainActivity: MainActivity)
 
    // fun getMap() : Map<String, ViewModel> /// for @StringKey
 
-    fun getMap() : Map<Class<*>, ViewModel> /// for @ClassKey
+   // fun getMap() : Map<Class<*>, ViewModel> /// for @ClassKey
 
 }

@@ -12,9 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private  val repository: QuoteRepository,
-                                            private val randomize: Randomize) : ViewModel(){
-
+class MainViewModel @Inject constructor(private  val repository: QuoteRepository) : ViewModel(){
     init{
         viewModelScope.launch(Dispatchers.IO) {
             repository.getQuotes(1)
@@ -22,11 +20,11 @@ class MainViewModel @Inject constructor(private  val repository: QuoteRepository
     }
 
     val quotes : LiveData<Response<QuoteList>>
-    get() = repository.quoteLiveData
+        get() = repository.quoteLiveData
 }
 
 class Randomize {
-     fun doAction(){
-         Log.d("MainViewModel ::", "hhjjj")
-     }
+    fun doAction(){
+        Log.d("MainViewModel ::", "hhjjj")
+    }
 }

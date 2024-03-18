@@ -22,6 +22,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     val DATABASE_NAME ="ContactDB"
+    @Inject
     lateinit var mainViewModel : MainViewModel
 
     @Inject
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-       val map =  (application as QuoteApplication).component.getMap()
+      // val map =  (application as QuoteApplication).component.getMap()
 
         (application as QuoteApplication).component.inject(this)
         mainViewModel = ViewModelProvider(this,mainViewModelFactory)[MainViewModel::class.java]

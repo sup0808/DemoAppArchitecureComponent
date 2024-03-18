@@ -5,14 +5,14 @@ import com.example.kotlinroomdatabase.viewmodel.MainViewModel
 import com.example.kotlinroomdatabase.viewmodel.MainViewModel2
 import dagger.Binds
 import dagger.Module
-import dagger.multibindings.ClassKey
+/*import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
-import dagger.multibindings.StringKey
+import dagger.multibindings.StringKey*/
 
-@Module
+//@Module
 abstract class ViewModelModule {
 
-    @Binds
+    /*@Binds
     @ClassKey(MainViewModel::class)
     @IntoMap
     abstract fun mainViewModel(mainViewModel: MainViewModel) : ViewModel
@@ -20,5 +20,5 @@ abstract class ViewModelModule {
     @Binds
     @ClassKey(MainViewModel2::class)
     @IntoMap
-    abstract fun mainViewModel(mainViewModel2: MainViewModel2) : ViewModel
+    abstract fun mainViewModel(mainViewModel2: MainViewModel2) : ViewModel*/
 }
