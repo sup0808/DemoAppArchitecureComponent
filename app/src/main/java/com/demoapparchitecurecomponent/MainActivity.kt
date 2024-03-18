@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
        GlobalScope.launch {
           val result = producer()
+           Log.d("ChezzyFlow item  ",result.value.toString())
            delay(6000)
           result.collect{
                    Log.d("ChezzyFlow item  ",it.toString())
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun producer() :Flow<Int>{
+    fun producer() :StateFlow<Int>{
         val mutableStateFlow = MutableStateFlow(10)
 
         GlobalScope.launch {
