@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        exampleZip()
 
        GlobalScope.launch {
           val result = producer()
@@ -36,6 +37,20 @@ class MainActivity : AppCompatActivity() {
                    Log.d("ChezzyFlow item  ",it.toString())
                }
       }
+
+    }
+
+    fun exampleZip(){
+        val flowOne = flowOf(1,2,3,4)
+        val flowTwo = flowOf("A","B","C")
+
+        GlobalScope.launch {
+            flowOne.zip(flowTwo){one,two ->
+                "$one$two"
+            }.collect{
+                    println(it)
+                }
+        }
 
     }
 
