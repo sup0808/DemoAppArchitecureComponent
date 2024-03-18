@@ -1,6 +1,6 @@
 package com.example.kotlinroomdatabase.di
 
-import androidx.lifecycle.ViewModel
+
 import com.example.kotlinroomdatabase.MainActivity
 import dagger.Component
 import javax.inject.Singleton
