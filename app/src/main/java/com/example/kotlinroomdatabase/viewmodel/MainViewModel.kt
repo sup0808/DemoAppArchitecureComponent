@@ -9,18 +9,19 @@ import com.example.kotlinroomdatabase.models.QuoteList
 import com.example.kotlinroomdatabase.repository.QuoteRepository
 import com.example.kotlinroomdatabase.repository.Response
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private  val repository: QuoteRepository) : ViewModel(){
     init{
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Main) {
             repository.getQuotes(1)
         }
     }
 
-    val quotes : LiveData<Response<QuoteList>>
-        get() = repository.quoteLiveData
+    val quotes : MutableStateFlow<Response<QuoteList>>
+        get() = repository.uiQuoteState
 }
 
 class Randomize {

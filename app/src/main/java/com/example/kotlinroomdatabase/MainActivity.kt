@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
@@ -16,6 +17,8 @@ import com.example.kotlinroomdatabase.databinding.ActivityMainBinding
 import com.example.kotlinroomdatabase.repository.Response
 import com.example.kotlinroomdatabase.viewmodel.MainViewModel
 import com.example.kotlinroomdatabase.viewmodel.MainViewModelFactory
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 import javax.inject.Inject
 
@@ -41,6 +44,8 @@ class MainActivity : AppCompatActivity() {
       // val map =  (application as QuoteApplication).component.getMap()
 
         (application as QuoteApplication).component.inject(this)
+      //  mainViewModel = ViewModelProvider(this,mainViewModelFactory)[MainViewModel::class.java]
+
         mainViewModel = ViewModelProvider(this,mainViewModelFactory)[MainViewModel::class.java]
 
 
@@ -56,22 +61,29 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setupWithNavController(navController)
         binding.navView.setupWithNavController(navController)
 
-        mainViewModel.quotes.observe(this) {
-          when(it){
-              is Response.Loading ->{}
-              is Response.Success ->{
-                  it.data?.let { it ->
-                      Toast.makeText(this,"Result :: ${it.results.size}", Toast.LENGTH_LONG).show()
-                  }
-              }
-              is Response.Error -> {
-                  Toast.makeText(this,it.errorMessage.toString(), Toast.LENGTH_LONG).show()
-              }
+        setUpObserver()
 
-          }
 
+    }
+
+
+    fun setUpObserver(){
+        lifecycleScope.launch {
+            mainViewModel.quotes.collect{
+                when(it){
+                   is Response.Loading ->{
+                    //show progress
+                   }
+                    is Response.Success -> {
+                        Toast.makeText(this@MainActivity,"Result :: ${it.datas?.results}", Toast.LENGTH_LONG).show()
+                    }
+                    is Response.Error -> {
+                        //Handle error
+                        Toast.makeText(this@MainActivity,it.errorMessage, Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
         }
-
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -9,29 +9,36 @@ import com.example.kotlinroomdatabase.api.QuoteService
 import com.example.kotlinroomdatabase.db.QuoteDatabase
 import com.example.kotlinroomdatabase.models.QuoteList
 import com.example.kotlinroomdatabase.utils.NetworkUtils
+import kotlinx.coroutines.flow.*
 
 import com.example.kotlinroomdatabase.repository.Response;
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 class QuoteRepository @Inject constructor(private  val quoteService: QuoteService,
-                                          private val quoteDatabase: QuoteDatabase,
-) {
+                                          private val quoteDatabase: QuoteDatabase) {
 
-    var mutableQuoteList = MutableLiveData<Response<QuoteList>>()
-    val quoteLiveData : LiveData<Response<QuoteList>>
-    get() = mutableQuoteList
-    suspend fun getQuotes(page : Int){
+
+        private val _uiQuoteState = MutableStateFlow<Response<QuoteList>>(Response.Loading)
+        val uiQuoteState : MutableStateFlow<Response<QuoteList>> =  _uiQuoteState
+
+     suspend fun getQuotes(page : Int){
 
         //if(NetworkUtils.verifyAvailableNetwork(context)){
-            try{
-                val result = quoteService.getQuotes(page)
-                if(result?.body() != null){
-                    quoteDatabase.getDao().addQuotes(result.body()!!.results)
-                    mutableQuoteList.postValue(Response.Success(result.body()))
-                }
-            } catch (ex : Exception){
-                mutableQuoteList.postValue(Response.Error(ex.message.toString()))
-            }
+
+           _uiQuoteState.value = Response.Loading
+
+             flow {
+                 emit(quoteService.getQuotes(page))
+             }
+             .flowOn(Dispatchers.IO)
+                    .catch {ex->
+                        _uiQuoteState.value = Response.Error(ex.message.toString())
+                    }
+                    .collect {
+                        _uiQuoteState.value = Response.Success(it)
+                    }
+
 
         }
       /*  else{

@@ -1,17 +1,10 @@
 package com.example.kotlinroomdatabase.repository
 
-import com.example.kotlinroomdatabase.models.QuoteList
 
-/*sealed class Response {
 
-    class Loading : Response()
-    class Success(val quoteList: QuoteList) : Response()
-    class Error(val errorMessage : String) : Response()
-}*/
+sealed interface Response<out T> {
 
-sealed class Response<T>(val data: T?=null,val errorMessage : String?=null ) {
-
-    class Loading<T> : Response<T>()
-    class Success<T>( data: T? = null) : Response<T>(data= data)
-    class Error<T>( errorMessage : String) : Response<T>(errorMessage = errorMessage)
+    object Loading : Response<Nothing>
+   data class Success<T>(val datas: T? = null) : Response<T>
+   data class Error(val errorMessage : String) : Response<Nothing>
 }

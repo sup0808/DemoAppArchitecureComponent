@@ -17,7 +17,7 @@ class NetworkModule {
        return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .build()
+           .build()
     }
 
     @Singleton
