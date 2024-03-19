@@ -38,13 +38,13 @@ class QuoteRepository @Inject constructor(private  val quoteService: QuoteServic
                     .collect {
                         _uiQuoteState.value = Response.Success(it)
                     }
-
-
-        }
+            }
       /*  else{
-            val quotes = quoteDatabase.getDao().getResults()
-            val quoteList  = QuoteList(1,1,1,quotes,1,1)
-            mutableQuoteList.postValue(Response.Success(quoteList))
+        flow{
+             emit(quoteDatabase.getDao().getResults())
+         }.collect{
+             _uiQuoteState.value = Response.Success(QuoteList(1,1,1,it,1,1))
+         }
 
         }*/
 
