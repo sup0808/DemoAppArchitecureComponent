@@ -15,39 +15,41 @@ import com.example.kotlinroomdatabase.repository.Response;
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
-class QuoteRepository @Inject constructor(private  val quoteService: QuoteService,
-                                          private val quoteDatabase: QuoteDatabase) {
+class QuoteRepository @Inject constructor(
+    private val quoteService: QuoteService,
+    private val quoteDatabase: QuoteDatabase
+) {
 
 
-        private val _uiQuoteState = MutableStateFlow<Response<QuoteList>>(Response.Loading)
-        val uiQuoteState : MutableStateFlow<Response<QuoteList>> =  _uiQuoteState
+    private val _uiQuoteState = MutableStateFlow<Response<QuoteList>>(Response.Loading)
+    val uiQuoteState: MutableStateFlow<Response<QuoteList>> = _uiQuoteState
 
-     suspend fun getQuotes(page : Int){
+    suspend fun getQuotes(page: Int) {
 
-        //if(NetworkUtils.verifyAvailableNetwork(context)){
+        //if (NetworkUtils.verifyAvailableNetwork(context)) {
 
-           _uiQuoteState.value = Response.Loading
+            _uiQuoteState.value = Response.Loading
 
-             flow {
-                 emit(quoteService.getQuotes(page))
-             }
-             .flowOn(Dispatchers.IO)
-                    .catch {ex->
-                        _uiQuoteState.value = Response.Error(ex.message.toString())
-                    }
-                    .collect {
-                        _uiQuoteState.value = Response.Success(it)
-                    }
+            flow {
+                emit(quoteService.getQuotes(page))
             }
-      /*  else{
-        flow{
-             emit(quoteDatabase.getDao().getResults())
-         }.collect{
-             _uiQuoteState.value = Response.Success(QuoteList(1,1,1,it,1,1))
-         }
+                .flowOn(Dispatchers.IO)
+                .catch { ex ->
+                    _uiQuoteState.value = Response.Error(ex.message.toString())
+                }
+                .collect {
+                      _uiQuoteState.value = Response.Success(it)
+                }
 
+       /* } else {
+            flow {
+                emit(quoteDatabase.getDao().getResults())
+            }.flowOn(Dispatchers.IO)
+                .collect {
+                    _uiQuoteState.value = Response.Success(QuoteList(1, 1, 1, it, 1, 1))
+                }
         }*/
 
+    }
 
-    //}
 }
