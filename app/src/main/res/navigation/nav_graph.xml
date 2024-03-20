@@ -30,9 +30,9 @@
             app:destination="@id/welcomeFragment" />
         <argument
             android:name="username"
-            android:defaultValue="@null"
+            android:defaultValue="Supriya"
             app:argType="string"
-            app:nullable="true" />
+            app:nullable="false" />
         <deepLink
             android:id="@+id/deepLink"
             app:uri="example.com/login/{username}" />
@@ -53,6 +53,9 @@
             android:name="password"
             app:argType="string"
             android:defaultValue="kkk" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_quoteActivity"
+            app:destination="@id/quoteActivity" />
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
@@ -67,4 +70,8 @@
         android:id="@+id/searchFragment"
         android:name="com.example.kotlinroomdatabase.frgament.SearchFragment"
         android:label="Search" />
+    <activity
+        android:id="@+id/quoteActivity"
+        android:name="com.example.kotlinroomdatabase.frgament.QuoteActivity"
+        android:label="QuoteActivity" />
 </navigation>

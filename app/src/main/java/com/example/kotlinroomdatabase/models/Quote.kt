@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "quote")
-data class Result(
+data class Quote(
     @PrimaryKey(autoGenerate = true)
     val quoteId : Int,
     val _id: String,

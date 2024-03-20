@@ -41,33 +41,34 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-      // val map =  (application as QuoteApplication).component.getMap()
-
-        (application as QuoteApplication).component.inject(this)
-      //  mainViewModel = ViewModelProvider(this,mainViewModelFactory)[MainViewModel::class.java]
-
-        mainViewModel = ViewModelProvider(this,mainViewModelFactory)[MainViewModel::class.java]
-
-
-
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
-
-        appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.homeFragment,R.id.searchFragment,R.id.drawer_layout)
-        )
-
-        setupActionBarWithNavController(navController,appBarConfiguration)
-        binding.bottomNav.setupWithNavController(navController)
-        binding.navView.setupWithNavController(navController)
-
-        setUpObserver()
-
-
+       // setUpViewModel()
+        //setUpObserver()
+        setUpNavigationComponent()
     }
 
+   private fun setUpViewModel(){
+        // val map =  (application as QuoteApplication).component.getMap()
 
-    fun setUpObserver(){
+        (application as QuoteApplication).component.inject(this)
+        mainViewModel = ViewModelProvider(this,mainViewModelFactory)[MainViewModel::class.java]
+    }
+
+  private fun setUpNavigationComponent(){
+      val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+      navController = navHostFragment.navController
+
+      appBarConfiguration = AppBarConfiguration(
+          setOf(R.id.homeFragment,R.id.searchFragment,R.id.drawer_layout)
+      )
+      setupActionBarWithNavController(navController,appBarConfiguration)
+      binding.bottomNav.setupWithNavController(navController)
+      binding.navView.setupWithNavController(navController)
+  }
+
+
+
+
+    private fun setUpObserver(){
         lifecycleScope.launch {
             mainViewModel.quotes.collect{
                 when(it){
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                     //show progress
                    }
                     is Response.Success -> {
-                        Toast.makeText(this@MainActivity,"Result :: ${it.datas?.results}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@MainActivity,"Result :: ${it.datas?.results?.size}", Toast.LENGTH_LONG).show()
                     }
                     is Response.Error -> {
                         //Handle error

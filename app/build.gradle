@@ -83,6 +83,7 @@ dependencies {
     // implementation 'com.google.dagger:dagger-android-support:2.21' // if you use the support libraries
     //annotationProcessor 'com.google.dagger:dagger-android-processor:2.21'
     kapt 'com.google.dagger:dagger-compiler:2.40.5'
+    kapt "com.google.dagger:dagger-android-processor:2.40.5"
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation "org.mockito:mockito-core:3.4.6"

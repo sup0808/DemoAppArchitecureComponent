@@ -7,8 +7,8 @@ import androidx.room.Query
 @Dao
 interface QuoteDao {
     @Insert
-    suspend fun addQuotes(quotes : List<com.example.kotlinroomdatabase.models.Result>)
+    suspend fun addQuotes(quotes : List<com.example.kotlinroomdatabase.models.Quote>)
 
     @Query("select * from quote")
-    fun getResults() : List<com.example.kotlinroomdatabase.models.Result>
+    fun getResults() : List<com.example.kotlinroomdatabase.models.Quote>
 }

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.kotlinroomdatabase.R
 import com.example.kotlinroomdatabase.databinding.FragmentLoginBinding
@@ -31,6 +32,8 @@ class WelcomeFragment : Fragment() {
 
         binding.txtUserName.text = args.username
         binding.txtPassword.text = args.password
+
+        findNavController().navigate(R.id.action_welcomeFragment_to_quoteActivity)
     }
 
 }

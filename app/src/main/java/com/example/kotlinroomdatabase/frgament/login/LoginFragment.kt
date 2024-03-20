@@ -31,7 +31,7 @@ class LoginFragment : Fragment() {
     @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.edUserName.text = args.username as Editable
+        binding.edUserName.setText(args.username)
 
 
         binding.button.setOnClickListener{
