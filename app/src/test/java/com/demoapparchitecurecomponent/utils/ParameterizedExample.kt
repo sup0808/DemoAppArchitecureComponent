@@ -20,7 +20,7 @@ class ParameterizedExample(val input : String, val expectedValue :Boolean) {
     companion object{
 
         @JvmStatic
-        @Parameterized.Parameters
+        @Parameterized.Parameters(name = " {0} is palindrome -- {1}")
         fun data():List<Array<Any>>{
             return listOf(
                 arrayOf("hello",false),
