@@ -15,18 +15,25 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private  val repository: QuoteRepository) : ViewModel(){
 
-    val quotes : MutableLiveData<Response<QuoteList>>
-        get() = quotes
+    var quotesMutableLiveData = MutableLiveData<Response<QuoteList>>()
+    val quotes : LiveData<Response<QuoteList>>
+        get() = quotesMutableLiveData
+
     init{
-        viewModelScope.launch(Dispatchers.IO) {
+        getQuoteData();
+    }
+
+    fun getQuoteData(){
+        viewModelScope.launch{
             val result = repository.getQuotes(1)
-            quotes.postValue(result)
+            quotesMutableLiveData.postValue(result)
         }
     }
 
     val quotesData : LiveData<Response<QuoteList>>
         get() = repository.quoteLiveData
 }
+
 
 class Randomize {
     fun doAction(){

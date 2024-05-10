@@ -2,6 +2,8 @@ package com.example.kotlinroomdatabase.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.kotlinroomdatabase.getOrAwaitValue
+import com.example.kotlinroomdatabase.models.Quote
+import com.example.kotlinroomdatabase.models.QuoteList
 import com.example.kotlinroomdatabase.repository.QuoteRepository
 import com.example.kotlinroomdatabase.repository.Response
 import kotlinx.coroutines.Dispatchers
@@ -35,26 +37,22 @@ class MainViewModelTest {
     @Test
     fun test_getQuotes(){
         runTest{
-            Mockito.`when`(respository.getQuotes(1)).thenReturn(Response.Success())
+            val quoteList = listOf<Quote>(
+                Quote(1,"kkk","bbb","jj","kk","kk","kk",4),
+                Quote(1,"kkk","bbb","jj","kk","kk","kk",4)
+            )
+            Mockito.`when`(respository.getQuotes(1)).thenReturn(Response.Success(QuoteList(
+                1,0,1,quoteList,8,9
+            )))
             val sut = MainViewModel(respository)
             testDispatcher.scheduler.advanceUntilIdle()
             val result= sut.quotes.getOrAwaitValue()
-            Assert.assertEquals(0, result.data?.results!!.size)
+            Assert.assertEquals(2, result.data?.results!!.size)
         }
 
     }
 
-   /* @Test
-    fun test_getQuotes_error(){
-        runTest{
-            Mockito.`when`(respository.getQuotes(1)).thenReturn(Response.Error("Something Wrong"))
-            val sut = MainViewModel(respository)
-            testDispatcher.scheduler.advanceUntilIdle()
-            val result= sut.quotes.getOrAwaitValue()
-            Assert.assertEquals(true, result is Response.Error)
-        }
 
-    }*/
 
     @After
     fun tearDown() {
