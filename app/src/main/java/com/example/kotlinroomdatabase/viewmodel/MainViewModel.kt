@@ -2,6 +2,7 @@ package com.example.kotlinroomdatabase.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kotlinroomdatabase.db.QuoteDatabase
@@ -13,13 +14,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private  val repository: QuoteRepository) : ViewModel(){
+
+    val quotes : MutableLiveData<Response<QuoteList>>
+        get() = quotes
     init{
         viewModelScope.launch(Dispatchers.IO) {
-            repository.getQuotes(1)
+            val result = repository.getQuotes(1)
+            quotes.postValue(result)
         }
     }
 
-    val quotes : LiveData<Response<QuoteList>>
+    val quotesData : LiveData<Response<QuoteList>>
         get() = repository.quoteLiveData
 }
 

@@ -20,19 +20,20 @@ class QuoteRepository @Inject constructor(private  val quoteService: QuoteServic
     var mutableQuoteList = MutableLiveData<Response<QuoteList>>()
     val quoteLiveData : LiveData<Response<QuoteList>>
     get() = mutableQuoteList
-    suspend fun getQuotes(page : Int){
-
+    suspend fun getQuotes(page : Int) : Response.Success<QuoteList>? {
+        var data: Response.Success<QuoteList>? =  null;
         //if(NetworkUtils.verifyAvailableNetwork(context)){
             try{
                 val result = quoteService.getQuotes(page)
                 if(result?.body() != null){
                     quoteDatabase.getDao().addQuotes(result.body()!!.results)
                     mutableQuoteList.postValue(Response.Success(result.body()))
+                    data = Response.Success(result.body())
                 }
             } catch (ex : Exception){
                 mutableQuoteList.postValue(Response.Error(ex.message.toString()))
             }
-
+return data
         }
       /*  else{
             val quotes = quoteDatabase.getDao().getResults()
@@ -43,4 +44,19 @@ class QuoteRepository @Inject constructor(private  val quoteService: QuoteServic
 
 
     //}
+
+    suspend fun getQuotesData(page : Int)  {
+
+        //if(NetworkUtils.verifyAvailableNetwork(context)){
+        try{
+            val result = quoteService.getQuotes(page)
+            if(result?.body() != null){
+                quoteDatabase.getDao().addQuotes(result.body()!!.results)
+                mutableQuoteList.postValue(Response.Success(result.body()))
+            }
+        } catch (ex : Exception){
+            mutableQuoteList.postValue(Response.Error(ex.message.toString()))
+        }
+
+    }
 }
