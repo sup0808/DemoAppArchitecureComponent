@@ -1,8 +1,4 @@
-# Kotlin MVVM example with Retrofit
+MVVM with Hilt
 
-# Navigation component playlist
-https://www.youtube.com/playlist?list=PLrnPJCHvNZuCamMFswP597mUF-whXoAA6
-
-
-Hilt MVVM
+Hilt Testing implement
 
