@@ -2,9 +2,9 @@ package com.demoapparchitecurecomponent
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.demoapparchitecurecomponent.QuoteDao
 
-@Database(entities = [com.example.kotlinroomdatabase.models.Result::class], version = 1)
+
+@Database(entities = [Quote::class], version = 1)
 abstract class QuoteDatabase :RoomDatabase() {
 
 
