@@ -13,7 +13,7 @@ fun Simple() : Flow<Int> = flow {
     }
 }
 
-fun main()= runBlocking {
+fun main() = runBlocking {
     println("Calling simple function...")
     val flow = Simple()
     println("Calling collect...")
@@ -22,3 +22,17 @@ fun main()= runBlocking {
     flow.collect{ println(it) }
 
 }
+/*
+* Output
+* Calling simple function...
+Calling collect...
+Flow started
+1
+2
+3
+Calling collect again ...
+Flow started
+1
+2
+3
+* */
