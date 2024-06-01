@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         exampleZip()
         lifecycleScope.launch{
-            zipExample()
-            zipExampleAnother()
+            mergeExample()
+            mergeExampleAnother()
             //combineMultipleFlowExample()
         }
 
