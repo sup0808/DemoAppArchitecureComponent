@@ -1,6 +1,7 @@
 package com.demoapparchitecurecomponent
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
@@ -18,16 +19,15 @@ fun FlowException() : Flow<String> =
         }
 
 fun main() = runBlocking {
-    try{
 
-        FlowException().collect{
-            println(it)
+        FlowException()
+            .catch { println("caught $it") }
+            .collect{
+                 println(it)
 
         }
-    }
-    catch (e : Throwable){
-        println("Caught :: $e")
-    }
+
+
 }
 /*
 Emitting 1
