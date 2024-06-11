@@ -1,0 +1,15 @@
+fun main() {
+    val kotlin = "kkk"
+    println(kotlin)
+    
+    println(kotlin.validate())
+}
+
+
+fun String.validate(): Boolean{
+   return  this.isNotEmpty()
+}
+
+fun View.setjj(){
+    this.vi= tre
+}
