@@ -1,0 +1,17 @@
+fun main() {
+    var machine1 = Machine("supriya")
+    var machine2 = Machine(12)
+    var machine3 = Machine(true)
+    var machine4 = Machine(User("Arvind",34))
+    println(machine1.type)
+    println(machine2.type)
+    println(machine3.type)
+    println(machine4.type.name)
+    
+}
+
+class Machine<T>(var type : T)
+
+class User(var name : String, var age: Int){
+	
+}
