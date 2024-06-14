@@ -1,0 +1,43 @@
+fun main() {
+   
+    var listName = getListItem("fhhf") 
+    println(listName)
+    
+     var listAge = getListItem(89)
+    println(listAge)
+    
+    var machine1 = Machine("test","arvind")
+   		println(machine1.addMachine("supriya"))
+        
+        
+     var machine2 = Machine(10,23,45)
+   	println(machine2.addMachine(90))
+  
+ }
+
+inline fun <reified T: Number> getList(item : T ): List<T>{
+    var list : MutableList<T> = mutableListOf()
+    list.add(item)
+  return list
+}
+
+//Generc function
+ fun <T> getListItem(item : T ): List<T>{
+    var list : MutableList<T> = mutableListOf()
+    list.add(item)
+  return list
+}
+ 
+ //Genric class
+ class Machine<T>(vararg types : T){
+     var typeList = types.toMutableList()
+     
+     fun addMachine(type : T):List<T>{
+         typeList.add(type)
+        	return typeList
+     }
+     
+ }
+ 
+
+class User(var name : String, var age : Int)
