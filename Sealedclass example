@@ -1,0 +1,19 @@
+sealed class Resource(val data : String?=null, val errssage : String? = null)
+    class Loading():Resource()
+    class Success(value : String):Resource(data=value)
+    class Fail(msg : String) : Resource(errssage = msg)
+    
+fun getApiResult( resource :Resource){
+    when(resource){
+        is Success ->{ println("Success ${resource.data}")} 
+        is Loading -> println("Loading")
+        is Fail ->println("Eroor ${resource.errssage}")
+    }
+}
+ 
+fun main() {
+	getApiResult(Loading())
+    getApiResult(Success("Result"))
+     getApiResult(Fail("ecsptiom"))
+   
+}

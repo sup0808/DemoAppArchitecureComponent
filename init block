@@ -1,0 +1,35 @@
+fun main() {
+   User("ARvind",12)
+   User(name ="Arvind")
+   User(address ="Delhi ",10,"bsbs")
+}
+
+class User(var name : String, var age: Int){
+    
+    init{
+    		println("init First called --- 1")
+	}
+	init{
+   		 println("init Secobd called --- 2")
+	}
+    
+    constructor(name : String) : this(name,10){
+          println("Secondary First constructor called --- 1")
+    }
+    
+    constructor(address : String, age : Int, name: String) : this(name,age){
+          println("Secondary Second called ---  -- $address")
+    }
+    
+}
+
+
+init First called --- 1
+init Secobd called --- 2
+init First called --- 1
+init Secobd called --- 2
+Secondary First constructor called --- 1
+init First called --- 1
+init Secobd called --- 2
+Secondary Second called ---  -- Delhi 
+
